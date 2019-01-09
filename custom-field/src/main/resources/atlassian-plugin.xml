@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="custom-field"/>
+  <!-- add our web resources -->
+  <web-resource key="custom-field-resources" name="custom-field Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="custom-field.css" location="/css/custom-field.css"/>
+    <resource type="download" name="custom-field.js" location="/js/custom-field.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>custom-field</context>
+  </web-resource>
+  <customfield-type name="Money Custom Field" i18n-name-key="money-custom-field.name" key="money-custom-field" class="com.example.customfield.jira.customfields.MoneyCustomField">
+    <description key="money-custom-field.description">The Money Custom Field Plugin</description>
+    <resource name="view" type="velocity" location="/templates/customfields/money-custom-field/view.vm"/>
+    <resource name="edit" type="velocity" location="/templates/customfields/money-custom-field/edit.vm"/>
+    <valid-searcher package="com.atlassian.jira.plugin.system.customfieldtypes" key="textsearcher"/>
+  </customfield-type>
+  <web-section name="Test" i18n-name-key="test.name" key="test_section"
+               location="test_link" weight="10"/>
+  <web-item key="link" name="Links Test" section="system.top.navigation.bar" weight="47">
+    <label>Test</label>
+    <link linkId="test_link">default.jspa</link>
+  </web-item>
+  <web-item key="mytest_link" name="Company Web Site" section="test_link/test_section" weight="10">
+    <label>My Test</label>
+    <link linkId="mytest_link">https://google.com</link>
+  </web-item>
+</atlassian-plugin>
